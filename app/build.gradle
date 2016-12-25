@@ -1,0 +1,116 @@
+apply plugin: 'com.android.application'
+
+// TODO: Update versions
+ext.app = [minSdk       : 19,
+           compileSdk   : 24,
+           targetSdk    : 24,
+           buildTools   : '24.0.3',
+           versionCode  : 1,
+           versionName  : '1.0.0', // Use semantic versioning
+           // TODO: Change app id
+           applicationId: 'codes.fabio.androidboilerplate']
+
+// TODO: Update to latest versions
+ext.libs = [supportLibs             : '24.2.1',
+            butterKnife             : '7.0.1',
+            jsr250Api               : '1.0',
+            dagger                  : '2.7',
+            daggerCompiler          : '2.7',
+            rxJava                  : '1.2.1',
+            rxAndroid               : '1.2.1',
+            timber                  : '4.3.1',
+            gson                    : '2.6.2',
+            okHttp                  : '3.4.2',
+            okHttpLoggingInterceptor: '3.4.2',
+            adapterDelegates        : '3.0.0',
+            glide                   : '3.7.0',
+            glideOkHttp             : '1.4.0@aar',
+            autoValue               : '1.2',
+            autoValueGson           : '0.3.2-rc1',
+            rxRelay                 : '1.2.0',
+            leakCanary              : '1.5',
+            mockito                 : '1.10.19',
+            jUnit                   : '4.12',
+            testRunner              : '0.5',
+            testRules               : '0.5',
+            hamcrest                : '1.3',
+            retrofitMock            : '2.1.0',
+            mockWebServer           : '3.4.2',
+            roboelectric            : '3.1.4',
+            espressoCore            : '2.2.2',]
+
+android {
+
+  compileSdkVersion app.compileSdk
+  buildToolsVersion app.buildTools
+
+  defaultConfig {
+    applicationId app.applicationId
+    minSdkVersion app.minSdk
+    targetSdkVersion app.targetSdk
+    versionCode app.versionCode
+    versionName app.versionName
+    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+  }
+
+  buildTypes {
+    debug {
+      applicationIdSuffix ".debug"
+    }
+  }
+}
+
+
+dependencies {
+  compile fileTree(include: ['*.jar'], dir: 'libs')
+
+  // Support libs
+  compile "com.android.support:appcompat-v7:$libs.supportLibs"
+  compile "com.android.support:design:$libs.supportLibs"
+  compile "com.android.support:recyclerview-v7:$libs.supportLibs"
+  compile "com.android.support:cardview-v7:$libs.supportLibs"
+
+  // Utilities
+  compile "com.jakewharton:butterknife:$libs.butterKnife"
+  debugCompile "com.squareup.leakcanary:leakcanary-android:$libs.leakCanary"
+  releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$libs.leakCanary"
+  compile "com.jakewharton.timber:timber:$libs.timber"
+  compile "com.hannesdorfmann:adapterdelegates3:$libs.adapterDelegates"
+
+  // Network
+  compile "com.squareup.okhttp3:okhttp:$libs.okHttp"
+  compile "com.google.code.gson:gson:$libs.gson"
+  compile "com.github.bumptech.glide:glide:$libs.glide"
+  compile "com.github.bumptech.glide:okhttp3-integration:$libs.glideOkHttp"
+
+  // Rx
+  compile "io.reactivex:rxjava:$libs.rxJava"
+  compile "io.reactivex:rxandroid:$libs.rxAndroid"
+  compile "com.jakewharton.rxrelay:rxrelay:$libs.rxRelay"
+
+  // Dagger
+  compile "com.google.dagger:dagger:$libs.dagger"
+  provided "javax.annotation:jsr250-api:$libs.jsr250Api"
+  annotationProcessor "com.google.dagger:dagger-compiler:$libs.daggerCompiler"
+
+  // AutoValue immutables types
+  compile "com.google.auto.value:auto-value:$libs.autoValue"
+  annotationProcessor "com.google.auto.value:auto-value:$libs.autoValue"
+  annotationProcessor "com.ryanharter.auto.value:auto-value-gson:$libs.autoValueGson"
+
+  // Testing
+  androidTestCompile "com.android.support:support-annotations:$libs.supportLibs"
+  androidTestCompile "org.mockito:mockito-core:$libs.mockito"
+  androidTestCompile "com.android.support.test:runner:$libs.testRunner"
+  androidTestCompile "com.android.support.test:rules:$libs.testRules"
+  androidTestCompile "org.hamcrest:hamcrest-library:$libs.hamcrest"
+  androidTestCompile("com.android.support.test.espresso:espresso-core:$libs.espressoCore", {
+    exclude group: 'com.android.support', module: 'support-annotations'
+  })
+
+  testCompile "com.squareup.retrofit2:retrofit-mock:$libs.retrofitMock"
+  testCompile "com.squareup.okhttp3:mockwebserver:$libs.mockWebServer"
+  testCompile "junit:junit:$libs.jUnit"
+  testCompile "org.mockito:mockito-core:$libs.mockito"
+  testCompile "org.robolectric:robolectric:$libs.roboelectric"
+}

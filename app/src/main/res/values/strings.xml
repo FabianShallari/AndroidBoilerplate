@@ -1,0 +1,5 @@
+<resources>
+  <string name="app_name">AndroidBoilerplate</string>
+  <string name="no_items">No Items to show :(</string>
+  <string name="unknown_error">Unknown error occurred. Please try again</string>
+</resources>

@@ -1,4 +1,4 @@
-package codes.fabio.androidboilerplate.ui.base;
+package codes.fabio.androidboilerplate.mvp.base;
 
 /**
  * The root interface for every view

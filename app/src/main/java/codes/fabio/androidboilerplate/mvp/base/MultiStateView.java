@@ -1,6 +1,5 @@
-package codes.fabio.androidboilerplate.ui.base;
+package codes.fabio.androidboilerplate.mvp.base;
 
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 /**
@@ -15,16 +14,16 @@ import android.support.annotation.Nullable;
  * {@link #showEmpty()}: Display an empty view (a TextView or an ImageView depending on the
  * implementation) if there are no data in the underlying data model
  *
- * {@link #showContent()}: After the content has been loaded the presenter calls {@link
- * #setData(Object)} to fill the view with data.
- * Afterwards, the presenter calls {@link #showContent()} to display the data
+ * {@link #showContent(M)} ()}: After the content has been loaded the presenter calls {@link
+ * #setData(M)} to fill the view with data.
+ * Afterwards, the presenter calls {@link #showContent(M)} to display the data
  *
  * @param <M> The underlying data model
  */
 
-public interface LceView<M> extends BaseView {
+public interface MultiStateView<M> extends BaseView {
 
-  void showContent();
+  void showContent(M data);
 
   void showEmpty();
 
@@ -32,5 +31,7 @@ public interface LceView<M> extends BaseView {
 
   void showLoading();
 
-  void setData(@NonNull M data);
+  void setData(M data);
+
+  void loadData(boolean refresh);
 }

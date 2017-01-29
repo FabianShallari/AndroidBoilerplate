@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+  <LinearLayout
+      android:layout_gravity="center"
+      android:gravity="center"
+      android:orientation="vertical"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+      <TextView
+          android:id="@+id/username"
+          android:text="Username"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"/>
+      <EditText
+          android:id="@+id/usernameEditText"
+          android:inputType="textEmailAddress"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+      <TextView
+          android:id="@+id/password"
+          android:text="Password"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"/>
+      <EditText
+          android:inputType="textVisiblePassword"
+          android:id="@+id/passwordEditText"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <Button
+        android:text="Login"
+        android:id="@+id/loginButton"
+        android:layout_gravity="right"
+        android:layout_marginRight="32dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:text="New Controller"
+        android:layout_marginTop="16dp"
+        android:id="@+id/newButton"
+        android:layout_gravity="end"
+        android:layout_marginEnd="32dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+  </LinearLayout>
+
+</FrameLayout>

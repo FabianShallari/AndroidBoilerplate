@@ -8,13 +8,19 @@
       android:label="@string/app_name"
       android:supportsRtl="true"
       android:theme="@style/AppTheme">
-    <activity android:name=".ui.MainActivity">
+
+    <activity android:name=".app.MainActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
-
-        <category android:name="android.intent.category.LAUNCHER"/>
+        <category android:name="android.intent.category.DEFAULT"/>
       </intent-filter>
     </activity>
+
+    <!-- Glide configuration module-->
+    <meta-data
+        android:name="codes.fabio.androidboilerplate.util.GlideConfigurationModule"
+        android:value="GlideModule"/>
+
   </application>
 
 </manifest>

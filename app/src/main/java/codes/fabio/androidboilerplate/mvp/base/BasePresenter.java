@@ -1,15 +1,13 @@
-package codes.fabio.androidboilerplate.ui.base;
+package codes.fabio.androidboilerplate.mvp.base;
 
 import android.support.annotation.NonNull;
 
 /**
- * The base interface for each mvp presenter
+ * The root interface for a MVP presenter
  */
 public interface BasePresenter<V extends BaseView> {
 
   void attachView(@NonNull V view);
 
-  boolean isViewAttached();
-
-  void detachView();
+  void detachView(boolean retainPresenter);
 }

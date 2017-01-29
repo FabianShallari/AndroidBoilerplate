@@ -1,0 +1,85 @@
+<ViewFlipper
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/viewFlipper"
+    android:background="@android:color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+  <android.support.v4.widget.SwipeRefreshLayout
+      android:id="@+id/contentView"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+    <android.support.v7.widget.RecyclerView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/recyclerView"
+        android:clipToPadding="false"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+  </android.support.v4.widget.SwipeRefreshLayout>
+
+  <LinearLayout
+      android:id="@+id/emptyView"
+      android:showDividers="middle"
+      android:layout_width="match_parent"
+      android:divider="@drawable/divider_vertical_normal"
+      android:orientation="vertical"
+      android:padding="@dimen/activity_horizontal_margin"
+      android:gravity="center"
+      android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/emptyTextView"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textSize="24sp"
+        tools:text="@string/no_items"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:id="@+id/emptyRetry"
+        android:text="@string/retry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+  </LinearLayout>
+
+  <LinearLayout
+      android:id="@+id/errorView"
+      android:showDividers="middle"
+      android:layout_width="match_parent"
+      android:divider="@drawable/divider_vertical_normal"
+      android:orientation="vertical"
+      android:padding="@dimen/activity_horizontal_margin"
+      android:gravity="center"
+      android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/errorTextView"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textSize="24sp"
+        android:text="@string/unknown_error"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:id="@+id/errorRetry"
+        android:text="@string/retry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+  </LinearLayout>
+
+  <ProgressBar
+      android:id="@+id/loadingView"
+      android:layout_gravity="center"
+      android:indeterminate="true"
+      android:indeterminateBehavior="cycle"
+      android:indeterminateTint="@color/colorPrimary"
+      android:indeterminateTintMode="src_in"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      tools:targetApi="lollipop"/>
+
+</ViewFlipper>

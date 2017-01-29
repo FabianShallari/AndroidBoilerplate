@@ -1,32 +1,34 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.squareup.sqldelight'
+apply plugin: 'me.tatarka.retrolambda'
 
 // TODO: Update versions
 ext.app = [minSdk       : 19,
-           compileSdk   : 24,
-           targetSdk    : 24,
-           buildTools   : '24.0.3',
+           compileSdk   : 25,
+           targetSdk    : 25,
+           buildTools   : '25.0.1',
            versionCode  : 1,
            versionName  : '1.0.0', // Use semantic versioning
            // TODO: Change app id
            applicationId: 'codes.fabio.androidboilerplate']
 
 // TODO: Update to latest versions
-ext.libs = [supportLibs             : '24.2.1',
-            butterKnife             : '7.0.1',
+ext.libs = [supportLibs             : '25.1.0',
+            butterKnife             : '8.4.0',
             jsr250Api               : '1.0',
-            dagger                  : '2.7',
-            daggerCompiler          : '2.7',
-            rxJava                  : '1.2.1',
+            dagger                  : '2.8',
+            daggerCompiler          : '2.8',
+            rxJava                  : '1.2.4',
             rxAndroid               : '1.2.1',
-            timber                  : '4.3.1',
-            gson                    : '2.6.2',
-            okHttp                  : '3.4.2',
-            okHttpLoggingInterceptor: '3.4.2',
+            timber                  : '4.4.0',
+            gson                    : '2.8.0',
+            okHttp                  : '3.5.0',
+            okHttpLoggingInterceptor: '3.5.0',
             adapterDelegates        : '3.0.0',
             glide                   : '3.7.0',
             glideOkHttp             : '1.4.0@aar',
-            autoValue               : '1.2',
-            autoValueGson           : '0.3.2-rc1',
+            autoValue               : '1.3',
+            autoValueGson           : '0.4.5',
             rxRelay                 : '1.2.0',
             leakCanary              : '1.5',
             mockito                 : '1.10.19',
@@ -34,10 +36,14 @@ ext.libs = [supportLibs             : '24.2.1',
             testRunner              : '0.5',
             testRules               : '0.5',
             hamcrest                : '1.3',
+            retrofit                : '2.1.0',
+            conductor               : '2.0.7',
             retrofitMock            : '2.1.0',
-            mockWebServer           : '3.4.2',
+            mockWebServer           : '3.5.0',
             roboelectric            : '3.1.4',
-            espressoCore            : '2.2.2',]
+            sqlbrite                : '1.1.1',
+            rxBinding               : '1.0.0',
+            espressoCore            : '2.2.2']
 
 android {
 
@@ -58,47 +64,64 @@ android {
       applicationIdSuffix ".debug"
     }
   }
+
+  configurations.all {
+    resolutionStrategy.force 'com.google.code.findbugs:jsr305:3.0.1'
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
 }
 
 
 dependencies {
   compile fileTree(include: ['*.jar'], dir: 'libs')
 
-  // Support libs
   compile "com.android.support:appcompat-v7:$libs.supportLibs"
   compile "com.android.support:design:$libs.supportLibs"
   compile "com.android.support:recyclerview-v7:$libs.supportLibs"
   compile "com.android.support:cardview-v7:$libs.supportLibs"
 
-  // Utilities
   compile "com.jakewharton:butterknife:$libs.butterKnife"
-  debugCompile "com.squareup.leakcanary:leakcanary-android:$libs.leakCanary"
-  releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$libs.leakCanary"
-  compile "com.jakewharton.timber:timber:$libs.timber"
+  annotationProcessor "com.jakewharton:butterknife-compiler:$libs.butterKnife"
+
   compile "com.hannesdorfmann:adapterdelegates3:$libs.adapterDelegates"
 
-  // Network
+  compile "com.jakewharton.timber:timber:$libs.timber"
+
+  debugCompile "com.squareup.leakcanary:leakcanary-android:$libs.leakCanary"
+  releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$libs.leakCanary"
+
+  compile "com.bluelinelabs:conductor:$libs.conductor"
+  compile "com.bluelinelabs:conductor-support:$libs.conductor"
+  compile "com.bluelinelabs:conductor-rxlifecycle:$libs.conductor"
+
+  compile "io.reactivex:rxjava:$libs.rxJava"
+  compile "io.reactivex:rxandroid:$libs.rxAndroid"
+  compile "com.jakewharton.rxbinding:rxbinding:$libs.rxBinding"
+  compile "com.jakewharton.rxrelay:rxrelay:$libs.rxRelay"
+
+  compile "com.google.dagger:dagger:$libs.dagger"
+  annotationProcessor "com.google.dagger:dagger-compiler:$libs.daggerCompiler"
+  provided "javax.annotation:jsr250-api:$libs.jsr250Api"
+
+  compile "com.squareup.sqlbrite:sqlbrite:$libs.sqlbrite"
+  compile "com.squareup.retrofit2:retrofit:$libs.retrofit"
+  compile "com.squareup.retrofit2:converter-gson:$libs.retrofit"
+  compile "com.squareup.retrofit2:adapter-rxjava:$libs.retrofit"
   compile "com.squareup.okhttp3:okhttp:$libs.okHttp"
+  compile "com.squareup.okhttp3:logging-interceptor:$libs.okHttp"
   compile "com.google.code.gson:gson:$libs.gson"
   compile "com.github.bumptech.glide:glide:$libs.glide"
   compile "com.github.bumptech.glide:okhttp3-integration:$libs.glideOkHttp"
 
-  // Rx
-  compile "io.reactivex:rxjava:$libs.rxJava"
-  compile "io.reactivex:rxandroid:$libs.rxAndroid"
-  compile "com.jakewharton.rxrelay:rxrelay:$libs.rxRelay"
-
-  // Dagger
-  compile "com.google.dagger:dagger:$libs.dagger"
-  provided "javax.annotation:jsr250-api:$libs.jsr250Api"
-  annotationProcessor "com.google.dagger:dagger-compiler:$libs.daggerCompiler"
-
-  // AutoValue immutables types
   compile "com.google.auto.value:auto-value:$libs.autoValue"
   annotationProcessor "com.google.auto.value:auto-value:$libs.autoValue"
   annotationProcessor "com.ryanharter.auto.value:auto-value-gson:$libs.autoValueGson"
+  provided "com.ryanharter.auto.value:auto-value-gson:$libs.autoValueGson"
 
-  // Testing
   androidTestCompile "com.android.support:support-annotations:$libs.supportLibs"
   androidTestCompile "org.mockito:mockito-core:$libs.mockito"
   androidTestCompile "com.android.support.test:runner:$libs.testRunner"
@@ -107,7 +130,6 @@ dependencies {
   androidTestCompile("com.android.support.test.espresso:espresso-core:$libs.espressoCore", {
     exclude group: 'com.android.support', module: 'support-annotations'
   })
-
   testCompile "com.squareup.retrofit2:retrofit-mock:$libs.retrofitMock"
   testCompile "com.squareup.okhttp3:mockwebserver:$libs.mockWebServer"
   testCompile "junit:junit:$libs.jUnit"

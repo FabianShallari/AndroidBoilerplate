@@ -1,11 +1,15 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
+  ext.gradlePlugins = [android: '2.2.3', sqldelight: '0.5.1', retroLambda: '3.5.0']
+
   repositories {
     jcenter()
   }
   dependencies {
-    classpath 'com.android.tools.build:gradle:2.2.3'
+    classpath "com.android.tools.build:gradle:$gradlePlugins.android"
+    classpath "com.squareup.sqldelight:gradle-plugin:$gradlePlugins.sqldelight"
+    classpath "me.tatarka:gradle-retrolambda:$gradlePlugins.retroLambda"
 
     // NOTE: Do not place your application dependencies here; they belong
     // in the individual module build.gradle files
@@ -15,6 +19,8 @@ buildscript {
 allprojects {
   repositories {
     jcenter()
+    mavenCentral()
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
   }
 }
 

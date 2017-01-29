@@ -1,0 +1,10 @@
+CREATE TABLE Model(
+  value INTEGER NOT NULL DEFAULT 0
+);
+
+selectAll:
+SELECT * FROM Model;
+
+insertRow:
+INSERT INTO Model VALUES (?);
+

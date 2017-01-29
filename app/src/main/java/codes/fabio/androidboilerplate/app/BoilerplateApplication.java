@@ -3,11 +3,13 @@ package codes.fabio.androidboilerplate.app;
 import android.app.Application;
 import android.content.Context;
 import com.squareup.leakcanary.LeakCanary;
+import com.squareup.leakcanary.RefWatcher;
 import javax.inject.Inject;
 
 public class BoilerplateApplication extends Application {
 
   private ApplicationComponent applicationComponent;
+  private RefWatcher refWatcher;
 
   @Inject TimberInitializer timberInitializer;
 
@@ -21,11 +23,16 @@ public class BoilerplateApplication extends Application {
 
     // Initialize Libraries
     timberInitializer.init();
-    LeakCanary.install(this);
+    refWatcher = LeakCanary.install(this);
   }
 
   // Utility method to easily access application component
   public static ApplicationComponent getApplicationComponent(Context context) {
     return ((BoilerplateApplication) context.getApplicationContext()).applicationComponent;
+  }
+
+  // Utility method to easily access RefWatcher
+  public static RefWatcher getRefWatcher(Context context) {
+    return ((BoilerplateApplication) context.getApplicationContext()).refWatcher;
   }
 }
